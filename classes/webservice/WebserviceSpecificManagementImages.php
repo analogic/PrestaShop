@@ -31,7 +31,7 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 
     /** @var WebserviceRequest */
     protected $wsObject;
-
+throw new WebserviceException('Please set an "image" parameter with image data for value', array(76, 400));
     /**
      * @var string The extension of the image to display
      */
@@ -1219,7 +1219,11 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
                     }
 
                     return true;
+                } else {
+                    throw new WebserviceException('File was not properly uploaded (missing tmp_name)', array(76, 400));
                 }
+            } else {
+                throw new WebserviceException('Please set an "image" parameter with image data for value', array(76, 400));
             }
         } else {
             throw new WebserviceException('Method ' . $this->wsObject->method . ' is not allowed for an image resource', array(77, 405));
